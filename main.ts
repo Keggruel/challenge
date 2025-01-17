@@ -2,19 +2,21 @@ namespace SpriteKind {
     export const Item = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite2, otherSprite2) {
+    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile`)
+    mySprite2.setStayInScreen(true)
     info.changeScoreBy(1)
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+    sprites.destroy(mySprite2, effects.fire, 500)
     pause(1000)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite2, otherSprite2) {
     info.changeScoreBy(-1)
     music.play(music.melodyPlayable(music.thump), music.PlaybackMode.UntilDone)
-    sprites.destroy(mySprite2, effects.fire, 500)
     pause(1000)
 })
 function addItem () {
-    sprites.destroy(mySprite2, effects.fire, 500)
     if (mySprite.overlapsWith(mySprite2)) {
+        sprites.destroy(mySprite2, effects.fire, 500)
         mySprite2 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
